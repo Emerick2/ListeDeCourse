@@ -1,43 +1,59 @@
+function containsNoDigits(s) {
+  return typeof s === 'string' && !/[0-9]/.test(s);
+}
+
+function AutorisationArticles(mot){
+  if (!containsNoDigits(mot)){
+    return false;
+    alert('Le nom de l\'article ne doit pas contenir de chiffres.');
+  } else if (mot.length>30) {
+    return false;
+    alert('Le nom de l\'article ne doit pas dépasser 30 caractères.');
+  } else if (mot === ""){
+    return false;
+    alert('Le nom de l\'article ne doit pas être vide.');
+  }
+  return true;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('add-item-form');
   const input = document.getElementById('item-input');
   const list = document.getElementById('shopping-list');
-
-  // 1. Gérer l'ajout d'un article
   form.addEventListener('submit', (event) => {
-    event.preventDefault(); // Empêche le rechargement de la page (très important !)
+    event.preventDefault();
 
     const itemName = input.value.trim();
-
-    if (itemName !== "") {
+    if (itemName !== "" && AutorisationArticles(itemName)) {
       addItem(itemName);
-      input.value = ''; // Réinitialiser le champ de saisie
+      input.value = '';
     }
   });
 
-  /**
-   * Crée et ajoute un élément <li> à la liste.
-   * @param {string} name - Nom de l'article.
-   */
   function addItem(name) {
-    // Création de l'élément <li>
     const listItem = document.createElement('li');
     listItem.className = 'shopping-list-item';
 
-    // Remplissage du contenu HTML : nom + bouton Retirer
     listItem.innerHTML = `
                     <span>${name}</span>
                     <button class="delete-btn">X</button>
                 `;
 
-    // 2. Gérer la suppression de l'article
     const deleteButton = listItem.querySelector('.delete-btn');
     deleteButton.addEventListener('click', () => {
-      // Supprime l'élément parent (le <li>) de la liste
       list.removeChild(listItem);
     });
 
-    // Ajout de l'article à la liste <ul>
     list.appendChild(listItem);
   }
 });
+
+
+
+
+// Exemples d'utilisation (console)
+console.log(containsNoDigits("Pommes")); // true
+console.log(containsNoDigits("Pain2")); // false
+console.log(containsNoDigits(123)); // false
+
+
