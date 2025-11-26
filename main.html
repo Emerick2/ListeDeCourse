@@ -1,1 +1,32 @@
-s
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 Ma Liste de Courses JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Ma Liste de Courses 🛍️</h1>
+
+        <form id="add-item-form">
+            <input type="text" id="item-name" placeholder="Nom de l'article" required>
+            <input type="number" id="item-price" placeholder="Prix (€)" min="0" step="0.01" required>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <ul id="shopping-list">
+        </ul>
+
+        <div class="total-section">
+            <p>Total estimé : <span id="total-amount">0.00</span> €</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
